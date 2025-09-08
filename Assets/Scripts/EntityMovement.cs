@@ -3,17 +3,20 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class EntityMovement : MonoBehaviour
 {
-    [SerializeField] private float _speed;
     [SerializeField] private KillZone _killZone;
+    [SerializeField] protected float speed;
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         _killZone.EnteredKillZone += Die;
     }
 
     private void Update()
     {
-        SetPosition();
+        if (TryGetTarget(out Vector2 target))
+        {
+            MoveToPosition(target);
+        }
     }
 
     private void OnDisable()
@@ -21,22 +24,16 @@ public abstract class EntityMovement : MonoBehaviour
         _killZone.EnteredKillZone -= Die;
     }
 
-    protected virtual void SetPosition()
-    {
-    }
+    protected abstract bool TryGetTarget(out Vector2 target);
 
-    protected virtual void MoveToPosition(Vector2 target)
-    {
-        transform.position = Vector2.MoveTowards(transform.position, target, _speed * Time.deltaTime);
-    }
+    protected abstract void MoveToPosition(Vector2 target);
 
     private void Die(EntityMovement entity)
     {
-        Debug.Log("умерай");
-
         if(entity == this)
         {
-            Destroy(this);
+            Debug.Log("умирай");
+            this.gameObject.SetActive(false);
         }
     }
 }
