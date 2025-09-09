@@ -1,63 +1,72 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+
 public class PlayerMovement : EntityMovement
 {
-    [SerializeField] private KeyCode _moveRight;
-    [SerializeField] private KeyCode _moveLeft;
-    [SerializeField] private KeyCode _moveDown;
-    [SerializeField] private KeyCode _jump;
+    [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private Legs _legs;
-
-    private Dictionary<KeyCode, Vector2> _directionByKey;
-    private Rigidbody2D _rigidbody;
-
-    protected override void OnEnable()
+    [SerializeField] private KeyCode _moveRightKey;
+    [SerializeField] private KeyCode _moveLeftKey;
+    [SerializeField] private KeyCode _jumpKey;
+    protected override bool TryChooseMovement(out MovementMode movementMode)
     {
-        base.OnEnable();
+        movementMode = MovementMode.Staying;
 
-        _rigidbody = GetComponent<Rigidbody2D>();
-
-        _directionByKey = new Dictionary<KeyCode, Vector2>()
+        if (Input.GetKeyDown(_jumpKey))
         {
-            { _moveRight, Vector2.right },
-            {_moveLeft, Vector2.left},
-            {_moveDown, Vector2.down},
-            {_jump, Vector2.up},
-        };
-    }
-
-    protected override bool TryGetTarget(out Vector2 targetPosition)
-    {
-        targetPosition = Vector2.zero;
-        bool isKeyDown = false;
-
-        foreach (var key in _directionByKey.Keys)
-        {
-            if(Input.GetKey(key))
+            if (_legs.IsGrounded)
             {
-                if (key == _jump)
-                {
-                    if (_legs.IsGrounded)
-                    {
-                        targetPosition += _directionByKey[key];
-                    }
-                }
-                else
-                {
-                    targetPosition += _directionByKey[key];
-                }
-
-                isKeyDown = true;
+                movementMode = MovementMode.Jumping;
+                return true;
             }
         }
 
-        return isKeyDown;
+        if (Input.GetKey(_moveRightKey) || Input.GetKey(_moveLeftKey))
+        {
+            if (_rigidbody.linearVelocity.sqrMagnitude < runningSpeed*runningSpeed)
+            {
+                movementMode = MovementMode.Walking;
+                return true;
+            }
+            else
+            {
+                movementMode = MovementMode.Running;
+                return true;
+            }
+        } 
+
+        return false;
     }
 
-    protected override void MoveToPosition(Vector2 targetPosition)
+    protected override Vector2 GetTarget()
     {
-        _rigidbody.linearVelocity = targetPosition*speed;
+        Vector2 targetPosition = Vector2.zero;
+
+        if (Input.GetKey(_moveLeftKey))
+        {
+            targetPosition += Vector2.left;
+        }
+
+        if (Input.GetKey(_moveRightKey))
+        {
+            targetPosition += Vector2.right;
+        }
+        return targetPosition;
+    }
+
+    protected override void WalkToPosition(Vector2 target)
+    {
+        _rigidbody.linearVelocity = new Vector2(target.x * walkingSpeed, _rigidbody.linearVelocity.y);
+    }
+
+    protected override void RunToPosition(Vector2 target)
+    {
+        _rigidbody.linearVelocity = new Vector2(target.x * runningSpeed, _rigidbody.linearVelocity.y);
+    }
+
+    protected override void Jump()
+    {
+        _rigidbody.AddForce(Vector2.up * jumpingSpeed, ForceMode2D.Impulse);
     }
 }

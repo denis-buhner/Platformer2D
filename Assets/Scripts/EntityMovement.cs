@@ -4,7 +4,9 @@ using UnityEngine;
 public abstract class EntityMovement : MonoBehaviour
 {
     [SerializeField] private KillZone _killZone;
-    [SerializeField] protected float speed;
+    [SerializeField] protected float walkingSpeed;
+    [SerializeField] protected float runningSpeed;
+    [SerializeField] protected float jumpingSpeed;
 
     protected virtual void OnEnable()
     {
@@ -13,9 +15,20 @@ public abstract class EntityMovement : MonoBehaviour
 
     private void Update()
     {
-        if (TryGetTarget(out Vector2 target))
+        if(TryChooseMovement(out MovementMode movementMode))
         {
-            MoveToPosition(target);
+            if(movementMode == MovementMode.Walking)
+            {
+                WalkToPosition(GetTarget());
+            }
+            else if (movementMode == MovementMode.Running)
+            {
+                RunToPosition(GetTarget());
+            }
+            else if(movementMode == MovementMode.Jumping)
+            {
+                Jump();
+            }
         }
     }
 
@@ -24,13 +37,27 @@ public abstract class EntityMovement : MonoBehaviour
         _killZone.EnteredKillZone -= Die;
     }
 
-    protected abstract bool TryGetTarget(out Vector2 target);
+    protected abstract bool TryChooseMovement(out MovementMode movementMode);
 
-    protected abstract void MoveToPosition(Vector2 target);
+    protected abstract Vector2 GetTarget();
+
+    protected abstract void WalkToPosition(Vector2 target);
+
+    protected abstract void RunToPosition(Vector2 target);
+
+    protected abstract void Jump();
+
+    protected enum MovementMode
+    {
+        Staying,
+        Jumping,
+        Walking,
+        Running,
+    }
 
     private void Die(EntityMovement entity)
     {
-        if(entity == this)
+        if (entity == this)
         {
             Debug.Log("умирай");
             this.gameObject.SetActive(false);

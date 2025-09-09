@@ -5499,12 +5499,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _killZone: {fileID: 1588585193}
-  speed: 1
-  _moveRight: 275
-  _moveLeft: 276
-  _moveDown: 274
-  _jump: 273
+  walkingSpeed: 5
+  runningSpeed: 2
+  jumpingSpeed: 10
+  _rigidbody: {fileID: 1415529844}
   _legs: {fileID: 471305141}
+  _moveRightKey: 275
+  _moveLeftKey: 276
+  _jumpKey: 273
 --- !u!50 &1415529844
 Rigidbody2D:
   serializedVersion: 5
