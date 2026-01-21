@@ -4,13 +4,7 @@ using static UnityEngine.GraphicsBuffer;
 [RequireComponent(typeof(CoinPool))]
 public class CoinSpawner : MonoBehaviour
 {
-    [SerializeField] private Target _target;
-    private CoinPool _pool;
-
-    private void Awake()
-    {
-        _pool = GetComponent<CoinPool>();
-    }
+    [SerializeField]private CoinPool _pool;
 
     public void TrySpawnCoin()
     {

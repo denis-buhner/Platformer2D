@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class CameraBehavior : MonoBehaviour
+public class Camera : MonoBehaviour
 {
     [SerializeField] private Player _player;
     [SerializeField] private float _speed;
