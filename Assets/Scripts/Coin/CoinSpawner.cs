@@ -6,7 +6,7 @@ public class CoinSpawner : MonoBehaviour
 {
     [SerializeField]private CoinPool _pool;
 
-    public void TrySpawnCoin()
+    public void SpawnCoin()
     {
         if(_pool.TryGetCoin(out Coin coin))
         {

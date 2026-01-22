@@ -10325,6 +10325,87 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39224ebed338cfe498323198cfaf7e6a, type: 3}
+--- !u!1 &1138989291
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1138989294}
+  - component: {fileID: 1138989293}
+  - component: {fileID: 1138989292}
+  m_Layer: 6
+  m_Name: CollisionHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1138989292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138989291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03c96e2b9252acb41b98b35174dc9500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CollisionHandler
+--- !u!58 &1138989293
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138989291}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.03231907, y: 0}
+  m_Radius: 0.93090343
+--- !u!4 &1138989294
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138989291}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1765393591819786239}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1163803248 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6166398039738880255, guid: 39224ebed338cfe498323198cfaf7e6a, type: 3}
@@ -11167,6 +11248,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInput
   _jumpKeyCode: 32
+--- !u!4 &1765393591819786239 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5801473006419782712, guid: c3b5ce3f404de3a4b93ecc51dee64466, type: 3}
+  m_PrefabInstance: {fileID: 5791464090936450624}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5791464090936450624
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11223,6 +11309,10 @@ PrefabInstance:
       propertyPath: _floorChecker
       value: 
       objectReference: {fileID: 7995666303129284850}
+    - target: {fileID: 5001544785560034511, guid: c3b5ce3f404de3a4b93ecc51dee64466, type: 3}
+      propertyPath: _collisionHandler
+      value: 
+      objectReference: {fileID: 1138989292}
     - target: {fileID: 5260343182402416985, guid: c3b5ce3f404de3a4b93ecc51dee64466, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -11285,7 +11375,10 @@ PrefabInstance:
     - {fileID: 1682677505583434752, guid: c3b5ce3f404de3a4b93ecc51dee64466, type: 3}
     - {fileID: 5737080207289222970, guid: c3b5ce3f404de3a4b93ecc51dee64466, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5801473006419782712, guid: c3b5ce3f404de3a4b93ecc51dee64466, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1138989294}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2048459171862001207, guid: c3b5ce3f404de3a4b93ecc51dee64466, type: 3}
       insertIndex: -1

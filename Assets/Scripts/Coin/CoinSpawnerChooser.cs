@@ -37,7 +37,7 @@ public class CoinSpawnerChooser : MonoBehaviour
 
             if (_spawners.Count > 0)
             {
-                _spawners[Random.Range(0, _spawners.Count)].TrySpawnCoin();
+                _spawners[Random.Range(0, _spawners.Count)].SpawnCoin();
             }
         }
     }
@@ -46,7 +46,7 @@ public class CoinSpawnerChooser : MonoBehaviour
     {
         foreach(CoinSpawner spawner in _spawners)
         {
-            spawner.TrySpawnCoin();
+            spawner.SpawnCoin();
         }
     }
 }

@@ -1,5 +1,5 @@
 using System;
-using UnityEngine;
+using UnityEngine;  
 
 public class PlayerInput : MonoBehaviour
 {
@@ -8,9 +8,11 @@ public class PlayerInput : MonoBehaviour
     public event Action<float> SelectedHorizontalDirection;
     public event Action SelectedJump;
 
-    void Update()
+    private string _horizontalAxis = "Horizontal";
+
+    private void Update()
     {
-        float HorizontalInput = Input.GetAxis("Horizontal");
+        float HorizontalInput = Input.GetAxis(_horizontalAxis);
 
         if (HorizontalInput != 0)
         {

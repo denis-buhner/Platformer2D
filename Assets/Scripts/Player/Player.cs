@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerInput _playerInput;
     [SerializeField] private Jumper _jumper;
     [SerializeField] private Mover _mover;
+    [SerializeField] private CollisionHandler _collisionHandler;
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpSpeed;
 

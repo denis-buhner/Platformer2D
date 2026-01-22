@@ -11,11 +11,8 @@ public class Coin : MonoBehaviour
         transform.position = position;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void Collect()
     {
-        if (collision.GetComponent<Player>() != null)
-        {
-            Died?.Invoke(this);
-        }
+        Died?.Invoke(this);
     }
 }
