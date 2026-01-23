@@ -12,11 +12,11 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
-        float HorizontalInput = Input.GetAxis(_horizontalAxis);
+        float horizontalInput = Input.GetAxis(_horizontalAxis);
 
-        if (HorizontalInput != 0)
+        if (horizontalInput != 0)
         {
-            SelectedHorizontalDirection?.Invoke(HorizontalInput);
+            SelectedHorizontalDirection?.Invoke(horizontalInput);
         }
 
         if (Input.GetKeyDown(_jumpKeyCode))

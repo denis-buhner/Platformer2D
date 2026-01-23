@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Flipper : MonoBehaviour
 {
-    [SerializeField] private float rotationAngle = 180;
+    [SerializeField] private float _rotationAngle = 180;
 
     private Transform _transform;
 
@@ -13,6 +13,6 @@ public class Flipper : MonoBehaviour
 
     public void Flip()
     {
-        _transform.Rotate(0, rotationAngle, 0);
+        _transform.Rotate(0, _rotationAngle, 0);
     }
 }

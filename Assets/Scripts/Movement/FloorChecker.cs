@@ -4,15 +4,15 @@ using UnityEngine;
 [RequireComponent (typeof(Collider2D))]
 public class FloorChecker : MonoBehaviour
 {
-    public event Action<bool> OnFloorStay;
+    public event Action<bool> FloorStaying;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        OnFloorStay?.Invoke(true);
+        FloorStaying?.Invoke(true);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        OnFloorStay?.Invoke(false);
+        FloorStaying?.Invoke(false);
     }
 }

@@ -7,33 +7,14 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _zPosition;
 
-    private Coroutine _moveToPlayerCoroutine;
-
-    private void OnEnable()
+    private void LateUpdate()
     {
-        if(_moveToPlayerCoroutine == null)
-        {
-            _moveToPlayerCoroutine = StartCoroutine(MoveToPlayer());
-        }
+        MoveToPlayer();
     }
 
-    private void OnDisable()
+    private void MoveToPlayer()
     {
-        if (_moveToPlayerCoroutine != null)
-        {
-            StopCoroutine( _moveToPlayerCoroutine );
-            _moveToPlayerCoroutine = null;
-        }
-    }
-
-    private IEnumerator MoveToPlayer()
-    {
-        while(gameObject.activeSelf)
-        {
-            yield return null;
-
-            Vector2 direction = Vector2.Lerp(transform.position, _player.transform.position, _speed*Time.deltaTime);
-            transform.position = new Vector3(direction.x, direction.y, _zPosition);
-        }
+        Vector2 direction = Vector2.Lerp(transform.position, _player.transform.position, _speed*Time.deltaTime);
+        transform.position = new Vector3(direction.x, direction.y, _zPosition);
     }
 }

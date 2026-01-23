@@ -11208,7 +11208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb5c348ee0984444a87338e69d3752e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Flipper
-  rotationAngle: 180
+  _rotationAngle: 180
 --- !u!114 &1765393591819786232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11234,7 +11234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c14359d2f41db314b851dfdbe557672a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jumper
-  floorChecker: {fileID: 7995666303129284850}
+  _floorChecker: {fileID: 7995666303129284850}
 --- !u!114 &1765393591819786234
 MonoBehaviour:
   m_ObjectHideFlags: 0

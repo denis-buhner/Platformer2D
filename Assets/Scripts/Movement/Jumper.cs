@@ -3,19 +3,20 @@ using UnityEngine;
 [RequireComponent(typeof(FloorChecker))]
 public class Jumper : MonoBehaviour
 {
-    [SerializeField] private FloorChecker floorChecker;
+    [SerializeField] private FloorChecker _floorChecker;
+
     private Rigidbody2D _rigidbody2D;
     private float _jumpSpeed;
-    private bool _isOnFloor;
+    private float _collisionCount = 0;
 
     private void OnEnable()
     {
-        floorChecker.OnFloorStay += SwitchFloorStaying;
+        _floorChecker.FloorStaying += SwitchFloorStaying;
     }
 
     private void OnDisable()
     {
-        floorChecker.OnFloorStay -= SwitchFloorStaying;
+        _floorChecker.FloorStaying -= SwitchFloorStaying;
     }
 
     public void Initialize(Rigidbody2D rigidbody2D, float jumpSpeed)
@@ -26,14 +27,16 @@ public class Jumper : MonoBehaviour
 
     public void Jump()
     {
-        if (_isOnFloor)
+        if (_collisionCount > 0)
         {
             _rigidbody2D.AddForceY(_jumpSpeed, ForceMode2D.Impulse);
         }
+
+        Debug.Log(_collisionCount);
     }
 
     private void SwitchFloorStaying(bool isOnFloor)
     {
-        _isOnFloor = isOnFloor;
+        _collisionCount = isOnFloor ? ++_collisionCount : --_collisionCount;
     }
 }
