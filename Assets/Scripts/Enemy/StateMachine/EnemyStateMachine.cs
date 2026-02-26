@@ -39,12 +39,12 @@ public class EnemyStateMachine : MonoBehaviour
         _stateUpdateCoroutine = StartCoroutine(StateUpdateTick());
 
         ChangeState<IdleState>();
-        //_health.IsDead += ChangeState<DeathState>;
+        _health.IsDead += ChangeState<DeathState>;
     }
 
     public void StopStateMachine()
     {
-        //_health.IsDead -= ChangeState<DeathState>;
+        _health.IsDead -= ChangeState<DeathState>;
 
         if (_stateUpdateCoroutine == null)
             return;
