@@ -1,23 +1,46 @@
+using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Mover), typeof(WaypointSelector), typeof(Rigidbody2D))]
-public class Enemy : MonoBehaviour
+[RequireComponent(typeof(Mover), typeof(EnemyPatrol), typeof(Rigidbody2D))]
+public class Enemy : MonoBehaviour, IHealth, IDamageable
 {
     [SerializeField] private Rigidbody2D _rigidbody2D;
-    [SerializeField] private WaypointSelector _waypointSelector;
+    [SerializeField] private EnemyPatrol _patroller;
     [SerializeField] private Mover _mover;
+    [SerializeField] private EnemyChasing _chasing;
     [SerializeField] private float _speed = 1f;
-    [SerializeField] private float _movingDistance = 1f;
+    [SerializeField] private EnemyStateMachine _stateMachine;
+    [SerializeField] private float _health;
+
+    public event Action IsDead;
 
     private void OnEnable()
     {
-        _waypointSelector.Initialize(transform, _movingDistance);
         _mover.Initialize(_rigidbody2D, _speed, transform);
-        _waypointSelector.Moving += _mover.MoveInDirection;
+        _patroller.Moving += _mover.MoveInDirection;
+        _chasing.Moving += _mover.MoveInDirection;
+
+        _stateMachine.StartStateMachine();
     }
 
     private void OnDisable()
     {
-        _waypointSelector.Moving -= _mover.MoveInDirection;
+        _stateMachine.StopStateMachine();
+
+        _patroller.Moving -= _mover.MoveInDirection;
+        _chasing.Moving -= _mover.MoveInDirection;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        if (damage > 0)
+        {
+            _health -= damage;
+        }
+
+        if (_health <= 0)
+        {
+            IsDead?.Invoke();
+        }
     }
 }

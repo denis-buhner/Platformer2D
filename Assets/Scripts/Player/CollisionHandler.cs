@@ -4,14 +4,22 @@ public class CollisionHandler : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        CollectCoin(collision);
-    }
-
-    private void CollectCoin(Collider2D collision)
-    {
-        if (collision.TryGetComponent(out Coin coin))
+        if (TryCollectCoin(collision, out Coin coinToCollect))
         {
-            coin.Collect();
+            coinToCollect.Collect();
         }
     }
+
+    private bool TryCollectCoin(Collider2D collision, out Coin coinToCollect)
+    {
+        coinToCollect = null;
+
+        if (collision.TryGetComponent(out Coin coin))
+        {
+            coinToCollect = coin;
+            return true;
+        }
+
+        return false;
+    }     
 }
