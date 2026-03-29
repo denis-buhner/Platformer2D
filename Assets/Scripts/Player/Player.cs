@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(PlayerInput), typeof(Jumper))]
 [RequireComponent(typeof(Mover))]
-public class Player : MonoBehaviour, ITargetable, IHealth
+public class Player : MonoBehaviour, ITargetable
 {
     [SerializeField] private Rigidbody2D _rigidbody2D;
     [SerializeField] private PlayerInput _playerInput;
@@ -13,9 +13,7 @@ public class Player : MonoBehaviour, ITargetable, IHealth
     [SerializeField] private CollisionHandler _collisionHandler;
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpSpeed;
-    [SerializeField] private float _health;
-
-    public event Action IsDead;
+    [SerializeField] private HealthHandler _healthHandler;
 
     private void OnEnable()
     {
@@ -34,15 +32,6 @@ public class Player : MonoBehaviour, ITargetable, IHealth
 
     public void TakeDamage(float damage)
     {
-        if(damage > 0)
-        {
-            _health -= damage;
-        }
-
-        if (_health <= 0)
-        {
-            IsDead?.Invoke();
-            gameObject.SetActive(false);
-        }
+        _healthHandler.TakeDamage(damage);
     }
 }

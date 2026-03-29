@@ -31,8 +31,6 @@ public class Jumper : MonoBehaviour
         {
             _rigidbody2D.AddForceY(_jumpSpeed, ForceMode2D.Impulse);
         }
-
-        Debug.Log(_collisionCount);
     }
 
     private void SwitchFloorStaying(bool isOnFloor)

@@ -19,7 +19,7 @@ public class EnemyStateMachine : MonoBehaviour
     [Header("Components")]
     [SerializeField] private EnemyComponents _enemyData;
     [SerializeField] private float _timeBetweenChecks;
-    [SerializeField] private IHealth _health;
+    [SerializeField] private Health _health;
 
     private Dictionary<Type, BaseState> _states;
     private Coroutine _stateUpdateCoroutine;

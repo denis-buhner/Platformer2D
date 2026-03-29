@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Flipper))]
 public class Mover : MonoBehaviour
 {
     [SerializeField] private Flipper _flipper;
@@ -13,8 +12,6 @@ public class Mover : MonoBehaviour
     {
         _rigidbody2D = rigidbody2D;
         _speed = speed;
-
-        _flipper.Initialize(playerTransform);
     }
 
     public void MoveInDirection(float directionX)

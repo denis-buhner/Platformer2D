@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class EnemyPatrol : MonoBehaviour
 {
-    [SerializeField] private List<Vector2> _targetsPositions;
     [SerializeField] private List<Transform> _targets;
     [SerializeField] private float _stoppingDistance = 0.1f;
+    [SerializeField] private List<Vector2> _targetsPositions;
 
     private Coroutine _selectingWayPoint;
     private int _currentWaypointIndex = 0;

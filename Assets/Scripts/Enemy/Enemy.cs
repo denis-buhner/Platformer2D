@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Mover), typeof(EnemyPatrol), typeof(Rigidbody2D))]
-public class Enemy : MonoBehaviour, IHealth, IDamageable
+[RequireComponent(typeof(EnemyPatrol), typeof(Rigidbody2D))]
+public class Enemy : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D _rigidbody2D;
     [SerializeField] private EnemyPatrol _patroller;
@@ -10,9 +10,7 @@ public class Enemy : MonoBehaviour, IHealth, IDamageable
     [SerializeField] private EnemyChasing _chasing;
     [SerializeField] private float _speed = 1f;
     [SerializeField] private EnemyStateMachine _stateMachine;
-    [SerializeField] private float _health;
-
-    public event Action IsDead;
+    [SerializeField] private HealthHandler _healthHandler;
 
     private void OnEnable()
     {
@@ -29,18 +27,5 @@ public class Enemy : MonoBehaviour, IHealth, IDamageable
 
         _patroller.Moving -= _mover.MoveInDirection;
         _chasing.Moving -= _mover.MoveInDirection;
-    }
-
-    public void TakeDamage(float damage)
-    {
-        if (damage > 0)
-        {
-            _health -= damage;
-        }
-
-        if (_health <= 0)
-        {
-            IsDead?.Invoke();
-        }
     }
 }

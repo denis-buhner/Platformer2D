@@ -1,5 +1,5 @@
 using UnityEngine;
-public class Combat : MonoBehaviour, IAttackable
+public class Combat : MonoBehaviour, IAttacker
 {
     [SerializeField] private float _attackDistance;
     [SerializeField] private float _coolDown;
